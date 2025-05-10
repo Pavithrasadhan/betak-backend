@@ -125,8 +125,8 @@ router.get('/', authenticate, adminMiddleware, async (req, res) => {
     const rentalsWithImages = rentals.map(rental => {
       return {
         ...rental.toObject(),
-        beforePictures: rental.beforePictures.map(file => `http://localhost:3001/uploads/${file}`),
-        afterPictures: rental.afterPictures.map(file => `http://localhost:3001/uploads/${file}`),
+        beforePictures: rental.beforePictures.map(file => `https://betak-backend.onrender.com/uploads/${file}`),
+        afterPictures: rental.afterPictures.map(file => `https://betak-backend.onrender.com/uploads/${file}`),
       };
     });
 

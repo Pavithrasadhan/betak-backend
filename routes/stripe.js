@@ -78,8 +78,8 @@ router.post('/create-checkout-session', async (req, res) => {
       },
     ],
     customer_email: userEmail,
-    success_url: `http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `http://localhost:5173/cancel`,
+    success_url: `https://betak-front.vercel.app/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `https://betak-front.vercel.app/cancel`,
     metadata: { userId },
   });
 
