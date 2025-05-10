@@ -8,13 +8,24 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3001;
 
+// CORS Configuration
+const corsOptions = {
+  origin: 'https://betak-front.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 db.on('error', (err) => {
@@ -40,7 +51,6 @@ app.use('/api/rental', rentalRoutes);
 app.use('/api/amenities', amenitiesRoutes);
 app.use('/api/stripe', stripeRoutes);
 app.use('/api/contact', contactRoutes);
-
 
 // Start server
 app.listen(port, () => {
